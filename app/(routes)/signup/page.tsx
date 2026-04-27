@@ -1,4 +1,6 @@
-import login_illustrator from "@/assets/login.svg";
+"use client";
+
+import signup_illustrator from "@/assets/signup.svg";
 import { Button } from "@/components/ui/button";
 import {
   InputGroup,
@@ -6,39 +8,40 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
-import { Lock, Mail } from "lucide-react";
+import { Lock, Mail, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
-const Page = () => {
+const Signup = () => {
   return (
     <section className="flex min-h-screen items-center justify-center bg-white px-4 py-10 md:py-0 dark:bg-gray-950">
       <div className="mx-auto grid w-full max-w-5xl overflow-hidden rounded-2xl border border-gray-200 bg-white md:grid-cols-2 dark:border-gray-800 dark:bg-gray-900">
-        {/* Illustration */}
-        <div className="hidden items-center justify-center bg-gray-50 p-8 md:flex dark:bg-gray-800">
-          <Image
-            src={login_illustrator}
-            alt="Login Illustration"
-            className="h-auto w-full max-w-md"
-            priority
-          />
-        </div>
-
-        {/* RIGHT: Form */}
+        {/* Form */}
         <div className="p-6 sm:p-8 md:p-10">
           {/* Heading */}
           <h1 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white">
-            Login to your <span className="text-green-500">MediVoice AI</span>{" "}
+            Create your <span className="text-green-500">MediVoice AI</span>{" "}
             account
           </h1>
 
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Enter your email and password to continue
+            Fill in your details to get started
           </p>
 
           {/* Form */}
-          <form className="mt-8 space-y-4">
+          <form className="mt-8 space-y-5">
+            {/* Name */}
+            <div className="space-y-2">
+              <Label>Full Name</Label>
+              <InputGroup>
+                <InputGroupInput type="text" placeholder="John Doe" required />
+                <InputGroupAddon>
+                  <User size={18} />
+                </InputGroupAddon>
+              </InputGroup>
+            </div>
+
             {/* Email */}
             <div className="space-y-2">
               <Label>Email</Label>
@@ -69,22 +72,12 @@ const Page = () => {
               </InputGroup>
             </div>
 
-            {/* Forgot Password */}
-            <div className="flex justify-end text-sm">
-              <Link
-                href="/forgot-password"
-                className="text-green-600 transition hover:underline"
-              >
-                Forgot password?
-              </Link>
-            </div>
-
-            {/* Login Button */}
+            {/* Submit */}
             <Button
               size={"lg"}
               className="w-full bg-green-500 hover:bg-green-600"
             >
-              Login
+              Create Account
             </Button>
           </form>
 
@@ -95,29 +88,38 @@ const Page = () => {
             <div className="h-px flex-1 bg-gray-300 dark:bg-gray-700" />
           </div>
 
-          {/* Google Login */}
+          {/* Google */}
           <Button
             variant="outline"
-            className="flex w-full items-center justify-center gap-3 py-3 transition hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="flex w-full items-center justify-center gap-3 py-3 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             <FcGoogle size={20} />
             Continue with Google
           </Button>
 
-          {/* Signup */}
+          {/* Login */}
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-            Don’t have an account?{" "}
+            Already have an account?{" "}
             <Link
-              href="/signup"
+              href="/login"
               className="font-medium text-green-600 hover:underline"
             >
-              Sign up
+              Login
             </Link>
           </p>
+        </div>
+        {/* Illustration  */}
+        <div className="hidden items-center justify-center bg-gray-50 p-8 md:flex dark:bg-gray-800">
+          <Image
+            src={signup_illustrator}
+            alt="Signup Illustration"
+            className="h-auto w-full max-w-md"
+            priority
+          />
         </div>
       </div>
     </section>
   );
 };
 
-export default Page;
+export default Signup;
