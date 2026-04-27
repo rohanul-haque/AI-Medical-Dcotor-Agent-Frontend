@@ -19,7 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={outfit.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${outfit.className} antialiased`}
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
