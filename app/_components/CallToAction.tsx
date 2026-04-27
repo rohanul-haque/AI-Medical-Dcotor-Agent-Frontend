@@ -6,7 +6,7 @@ const CTA = () => {
   return (
     <section>
       <AppLayout>
-        <div className="rounded-3xl bg-gradient-to-r from-green-500 to-emerald-500 p-10 text-center">
+        <div className="rounded-3xl bg-linear-to-r from-green-500 to-emerald-500 p-10 text-center">
           {/* Title */}
           <h2 className="text-2xl font-bold text-white md:text-3xl">
             Start Your AI Healthcare Journey Today

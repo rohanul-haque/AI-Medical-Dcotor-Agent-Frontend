@@ -1,28 +1,6 @@
-"use client";
-
+import { steps } from "@/data/Steps";
 import AppLayout from "@/layout/AppLayout";
-import { Brain, FileText, Mic } from "lucide-react";
 import SectionTitle from "./SectionTitle";
-
-const steps = [
-  {
-    title: "Speak Your Symptoms",
-    description:
-      "Use your voice to describe symptoms naturally — no typing needed.",
-    icon: Mic,
-  },
-  {
-    title: "AI Analyzes Instantly",
-    description:
-      "Advanced AI processes your input and provides smart health insights.",
-    icon: Brain,
-  },
-  {
-    title: "Get Results & Guidance",
-    description: "Receive suggestions, reports, and next steps within seconds.",
-    icon: FileText,
-  },
-];
 
 const HowItWorks = () => {
   return (

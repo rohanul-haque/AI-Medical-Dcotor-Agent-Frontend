@@ -1,5 +1,6 @@
 import artificial_healthcare from "@/assets/Artificial-Intelligence-in-Healthcare.jpg";
 import { Button } from "@/components/ui/button";
+import { features } from "@/data/Feature";
 import AppLayout from "@/layout/AppLayout";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
@@ -41,15 +42,12 @@ const About = () => {
 
             {/* Features */}
             <div className="mt-4 space-y-3">
-              {[
-                "Instant symptom guidance",
-                "24/7 AI-powered support",
-                "Smart doctor recommendations",
-                "Natural voice conversations",
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2">
+              {features.map((item) => (
+                <div key={item.id} className="flex items-center gap-2">
                   <CheckCircle size={18} className="text-green-500" />
-                  <p className="text-gray-700 dark:text-gray-300">{item}</p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    {item.title}
+                  </p>
                 </div>
               ))}
             </div>

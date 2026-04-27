@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import AppLayout from "@/layout/AppLayout";
 import { ArrowRight } from "lucide-react";
