@@ -32,3 +32,11 @@ export type Service = {
   description: string;
   icon: LucideIcon;
 };
+
+export type AIDoctorAgent = {
+  id: number;
+  specialist: string;
+  description: string;
+  image: StaticImageData;
+  agentPrompt: string;
+};

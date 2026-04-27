@@ -1,5 +1,6 @@
 import About from "./_components/About";
 import CTA from "./_components/CallToAction";
+import Doctors from "./_components/Doctors";
 import Footer from "./_components/Footer";
 import Hero from "./_components/Hero";
 import HowItWorks from "./_components/HowItWorks";
@@ -14,6 +15,7 @@ const Home = () => {
       <Hero />
       <About />
       <Services />
+      <Doctors />
       <HowItWorks />
       <Testimonial />
       <CTA />
