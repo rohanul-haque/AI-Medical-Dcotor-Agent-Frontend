@@ -9,7 +9,7 @@ import SectionTitle from "./SectionTitle";
 
 const Doctors = () => {
   return (
-    <section id="doctors" className="dark:bg-gray-950">
+    <section id="doctors" className="bg-gray-100/50 dark:bg-gray-900/50">
       <AppLayout>
         {/* Heading */}
         <SectionTitle

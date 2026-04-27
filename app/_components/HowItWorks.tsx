@@ -4,7 +4,7 @@ import SectionTitle from "./SectionTitle";
 
 const HowItWorks = () => {
   return (
-    <section className="bg-gray-100/50 dark:bg-gray-900/50">
+    <section>
       <AppLayout>
         {/* Header */}
         <SectionTitle

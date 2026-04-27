@@ -6,7 +6,7 @@ import SectionTitle from "./SectionTitle";
 
 const Testimonial = () => {
   return (
-    <section id="testimonials" className="dark:bg-gray-950">
+    <section id="testimonials" className="bg-gray-100/50 dark:bg-gray-900/50">
       <AppLayout>
         {/* section title */}
         <SectionTitle
