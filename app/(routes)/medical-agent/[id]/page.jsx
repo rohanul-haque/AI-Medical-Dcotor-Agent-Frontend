@@ -1,91 +1,100 @@
 "use client";
 
+import Navbar from "@/app/_components/Navbar";
+import doctor from "@/assets/doctor1.png";
 import { Button } from "@/components/ui/button";
-import { Mic, MicOff, Phone } from "lucide-react";
+import AppLayout from "@/layout/AppLayout";
+import { PhoneCall, PhoneOff } from "lucide-react";
+import Image from "next/image";
 
 const CallPage = () => {
+  const isConnected = true;
+
   return (
-    <div className="flex h-screen flex-col bg-gray-50">
-      
-      {/* Header */}
-      <div className="flex items-center justify-between border-b bg-white p-4">
-        <div>
-          <h2 className="text-lg font-semibold">AI Doctor Call</h2>
-          <p className="text-sm text-gray-500">
-            Connected • 02:14
-          </p>
-        </div>
+    <>
+      <Navbar />
+      <AppLayout>
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-10">
+          {/* Top Bar */}
+          <div className="flex items-center justify-between">
+            <div
+              className={`flex items-center gap-2 rounded-full px-4 py-1 text-sm font-medium ${
+                isConnected
+                  ? "bg-green-100 text-green-600"
+                  : "bg-red-100 text-red-500"
+              }`}
+            >
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  isConnected ? "bg-green-500" : "bg-red-500"
+                }`}
+              ></span>
+              {isConnected ? "Connected" : "Not Connected"}
+            </div>
 
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-green-500" />
-        </div>
-      </div>
+            <span className="text-sm font-semibold text-gray-600">00:00</span>
+          </div>
 
-      {/* Doctor Info */}
-      <div className="flex flex-col items-center gap-2 py-6">
-        <img
-          src="http://localhost:8080/images/doctor1.png"
-          className="h-20 w-20 rounded-full object-cover"
-          alt="doctor"
-        />
-        <h3 className="text-lg font-semibold">Cardiologist</h3>
-        <p className="text-sm text-gray-500">
-          AI Medical Assistant
-        </p>
-      </div>
+          {/* Doctor Section */}
+          <div className="my-14 flex flex-col items-center justify-center text-center">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-green-400 opacity-30 blur-xl"></div>
 
-      {/* Chat Section */}
-      <div className="flex-1 space-y-3 overflow-y-auto px-4 pb-4">
-        
-        {/* User message */}
-        <div className="flex justify-end">
-          <div className="max-w-xs rounded-lg bg-green-500 px-4 py-2 text-white">
-            I have chest pain for 2 days
+              <Image
+                src={doctor}
+                alt="doctor"
+                width={110}
+                height={110}
+                className="relative h-[110px] w-[110px] rounded-full border-4 border-white object-cover shadow-lg"
+              />
+            </div>
+
+            <h2 className="mt-4 text-xl font-semibold text-gray-800">
+              General Physician
+            </h2>
+            <p className="text-sm text-gray-500">AI Medical Voice Agent</p>
+          </div>
+
+          {/* Chat Section */}
+          <div className="mx-auto max-w-2xl space-y-4">
+            {/* Agent Message */}
+            <div className="flex justify-start">
+              <div className="max-w-xs rounded-2xl rounded-bl-none bg-gray-100 px-4 py-2 text-sm text-gray-700 shadow">
+                Hello! How can I help you today?
+              </div>
+            </div>
+
+            {/* User Message */}
+            <div className="flex justify-end">
+              <div className="max-w-xs rounded-2xl rounded-br-none bg-green-500 px-4 py-2 text-sm text-white shadow">
+                I have a headache since morning.
+              </div>
+            </div>
+          </div>
+
+          {/* Call Button */}
+          <div className="mt-12 flex justify-center">
+            {isConnected ? (
+              <Button
+                className="flex items-center gap-2 rounded-full bg-red-500 px-6 py-3 text-white hover:bg-red-600"
+                size="lg"
+              >
+                <PhoneOff size={18} />
+                End Call
+              </Button>
+            ) : (
+              <Button
+                className="flex items-center gap-2 rounded-full bg-green-500 px-6 py-3 text-white hover:bg-green-600"
+                size="lg"
+              >
+                <PhoneCall size={18} />
+                Start Call
+              </Button>
+            )}
           </div>
         </div>
-
-        {/* Agent message */}
-        <div className="flex justify-start">
-          <div className="max-w-xs rounded-lg bg-white px-4 py-2 shadow">
-            You may need to consult a cardiologist. Any breathing issues?
-          </div>
-        </div>
-
-        {/* User message */}
-        <div className="flex justify-end">
-          <div className="max-w-xs rounded-lg bg-green-500 px-4 py-2 text-white">
-            Yes, sometimes I feel shortness of breath
-          </div>
-        </div>
-
-        {/* Agent message */}
-        <div className="flex justify-start">
-          <div className="max-w-xs rounded-lg bg-white px-4 py-2 shadow">
-            I recommend immediate consultation. Please avoid stress.
-          </div>
-        </div>
-
-      </div>
-
-      {/* Bottom Controls */}
-      <div className="flex items-center justify-center gap-6 border-t bg-white p-4">
-        
-        {/* Mic Button */}
-        <Button className="rounded-full bg-gray-200 text-black">
-          <Mic />
-        </Button>
-
-        {/* End Call */}
-        <Button className="rounded-full bg-red-500 hover:bg-red-600">
-          <Phone className="rotate-[135deg]" />
-        </Button>
-
-        {/* Mic Off */}
-        <Button className="rounded-full bg-gray-200 text-black">
-          <MicOff />
-        </Button>
-      </div>
-    </div>
+      </AppLayout>
+    </>
   );
 };
 
