@@ -8,12 +8,78 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
-import { Lock, Mail, User } from "lucide-react";
+import { LoginApiResponse } from "@/types/types";
+import axiosInstance from "@/utils/axios";
+import axios from "axios";
+import { Lock, Mail, User, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 const Signup = () => {
+  const [avatar, setAvater] = useState<File | null>(null);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const signupHandler = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      if (avatar && avatar.size > 1000000) {
+        toast.error("Profile picture size should be less than 1MB");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+
+      if (avatar) {
+        formData.append("avatar", avatar);
+      }
+
+      setLoading(true);
+
+      const { data } = await axiosInstance.post<LoginApiResponse>(
+        "/auth/signup",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      if (data.success) {
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAvater(null);
+
+        toast.success(data.message);
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Signup failed");
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="flex min-h-screen items-center justify-center bg-white px-4 py-10 md:py-0 dark:bg-gray-950">
       <div className="mx-auto grid w-full max-w-5xl overflow-hidden rounded-2xl border border-gray-200 bg-white md:grid-cols-2 dark:border-gray-800 dark:bg-gray-900">
@@ -30,12 +96,34 @@ const Signup = () => {
           </p>
 
           {/* Form */}
-          <form className="mt-8 space-y-5">
+          <form onSubmit={signupHandler} className="mt-8 space-y-5">
+            {/* profile */}
+            <div className="space-y-2">
+              <Label>Profile Picture</Label>
+              <InputGroup>
+                <InputGroupInput
+                  type="file"
+                  accept=".jpg, .jpeg, .png"
+                  onChange={(e) => setAvater(e.target.files![0] || null)}
+                  required
+                />
+                <InputGroupAddon>
+                  <UserRound size={18} />
+                </InputGroupAddon>
+              </InputGroup>
+            </div>
             {/* Name */}
+
             <div className="space-y-2">
               <Label>Full Name</Label>
               <InputGroup>
-                <InputGroupInput type="text" placeholder="John Doe" required />
+                <InputGroupInput
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="John Doe"
+                  required
+                />
                 <InputGroupAddon>
                   <User size={18} />
                 </InputGroupAddon>
@@ -48,6 +136,8 @@ const Signup = () => {
               <InputGroup>
                 <InputGroupInput
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   required
                 />
@@ -63,6 +153,8 @@ const Signup = () => {
               <InputGroup>
                 <InputGroupInput
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
                 />
@@ -75,9 +167,10 @@ const Signup = () => {
             {/* Submit */}
             <Button
               size={"lg"}
+              disabled={loading}
               className="w-full bg-green-500 hover:bg-green-600"
             >
-              Create Account
+              {loading ? "Creating..." : "Create Account"}
             </Button>
           </form>
 

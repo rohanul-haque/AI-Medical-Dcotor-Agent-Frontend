@@ -39,4 +39,10 @@ export type AIDoctorAgent = {
   description: string;
   image: StaticImageData;
   agentPrompt: string;
+  type: string;
+};
+
+export type LoginApiResponse = {
+  success: boolean;
+  message: string;
 };

@@ -14,11 +14,13 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const pathName = usePathname();
   const { setTheme, theme } = useTheme();
+
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-300/60 backdrop-blur-md dark:border-gray-700/60">
@@ -74,6 +76,7 @@ const Navbar = () => {
           <Button
             size="lg"
             className="hidden cursor-pointer bg-green-500 hover:bg-green-600 lg:block dark:text-white"
+            onClick={() => router.push("/login")}
           >
             Create Account
           </Button>
@@ -126,6 +129,7 @@ const Navbar = () => {
                 <Button
                   size={"lg"}
                   className="w-full cursor-pointer bg-green-500 hover:bg-green-600 dark:text-white"
+                  onClick={() => router.push("/login")}
                 >
                   Create Account
                 </Button>

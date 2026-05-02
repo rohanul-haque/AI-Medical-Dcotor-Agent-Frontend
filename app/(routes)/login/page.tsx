@@ -1,3 +1,5 @@
+"use client";
+
 import login_illustrator from "@/assets/login.svg";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,12 +8,53 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
+import axiosInstance from "@/utils/axios";
+import axios from "axios";
 import { Lock, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 const Page = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const loginHandler = async (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const { data } = await axiosInstance.post("/auth/login", {
+        email,
+        password,
+      });
+
+      if (data.success) {
+        setEmail("");
+        setPassword("");
+
+        toast.success(data.message);
+        router.push("/dashboard");
+      }
+    } catch (error: unknown) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Login failed");
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="flex min-h-screen items-center justify-center bg-white px-4 py-10 md:py-0 dark:bg-gray-950">
       <div className="mx-auto grid w-full max-w-5xl overflow-hidden rounded-2xl border border-gray-200 bg-white md:grid-cols-2 dark:border-gray-800 dark:bg-gray-900">
@@ -38,7 +81,7 @@ const Page = () => {
           </p>
 
           {/* Form */}
-          <form className="mt-8 space-y-4">
+          <form onSubmit={loginHandler} className="mt-8 space-y-4">
             {/* Email */}
             <div className="space-y-2">
               <Label>Email</Label>
@@ -46,6 +89,8 @@ const Page = () => {
                 <InputGroupInput
                   type="email"
                   placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <InputGroupAddon>
@@ -60,6 +105,8 @@ const Page = () => {
               <InputGroup>
                 <InputGroupInput
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
                 />
@@ -82,9 +129,11 @@ const Page = () => {
             {/* Login Button */}
             <Button
               size={"lg"}
+              disabled={loading}
+              type="submit"
               className="w-full bg-green-500 hover:bg-green-600"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
 

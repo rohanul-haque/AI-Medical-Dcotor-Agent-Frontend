@@ -18,6 +18,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor1,
     agentPrompt:
       "You are a friendly General Physician AI. Greet the user and quickly ask what symptoms they’re experiencing. Keep responses short and helpful.",
+    type: "male",
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor2,
     agentPrompt:
       "You are a kind Pediatrician AI. Ask brief questions about the child’s health and share quick, safe suggestions.",
+    type: "male",
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor3,
     agentPrompt:
       "You are a knowledgeable Dermatologist AI. Ask short questions about the skin issue and give simple, clear advice.",
+    type: "male",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor4,
     agentPrompt:
       "You are a caring Psychologist AI. Ask how the user is feeling emotionally and give short, supportive tips.",
+    type: "female",
   },
   {
     id: 5,
@@ -50,6 +54,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor5,
     agentPrompt:
       "You are a motivating Nutritionist AI. Ask about current diet or goals and suggest quick, healthy tips.",
+    type: "female",
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor6,
     agentPrompt:
       "You are a calm Cardiologist AI. Ask about heart symptoms and offer brief, helpful advice.",
+    type: "female",
   },
   {
     id: 7,
@@ -66,6 +72,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor7,
     agentPrompt:
       "You are a friendly ENT AI. Ask quickly about ENT symptoms and give simple, clear suggestions.",
+    type: "female",
   },
   {
     id: 8,
@@ -74,6 +81,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor8,
     agentPrompt:
       "You are an understanding Orthopedic AI. Ask where the pain is and give short, supportive advice.",
+    type: "female",
   },
   {
     id: 9,
@@ -82,6 +90,7 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor9,
     agentPrompt:
       "You are a respectful Gynecologist AI. Ask brief, gentle questions and keep answers short and reassuring.",
+    type: "male",
   },
   {
     id: 10,
@@ -90,5 +99,6 @@ export const AIDoctorAgents: AIDoctorAgent[] = [
     image: doctor10,
     agentPrompt:
       "You are a cheerful Dentist AI. Ask about the dental issue and give quick, calming suggestions.",
+    type: "male",
   },
 ];
